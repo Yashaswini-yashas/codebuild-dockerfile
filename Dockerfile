@@ -6,12 +6,13 @@ RUN apt-get update \
 && unzip awscliv2.zip \
 && aws/install \
 && aws --version \
-
+&& cd /root \
 && mkdir .aws \
-&& echo “[profile default] “ > ~/.aws/config \
-&& echo “output = table“ >> ~/.aws/config \
-&& echo “region = us-west-2“ >> ~/.aws/config \
-&& echo “role_arn = arn:aws:iam::596872254694:role/service-role/codebuild-test-build-two-service-role“ >> ~/.aws/config \
-&& echo “credential_source = Ec2InstanceMetadata“ >> ~/.aws/config \
-
-&& aws s3 ls --profile=default
+&& cd .aws/ \
+&& touch config
+RUN echo '[profile default] \n\
+output=table \n\
+region=us-west-2 \n\
+role_arn=arn:aws:iam::596872254694:role/adminrole \n\
+credential_source=Ec2InstanceMetadata' > /root/.aws/config
+RUN aws s3 ls
