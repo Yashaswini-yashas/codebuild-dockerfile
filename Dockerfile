@@ -10,4 +10,4 @@ RUN apt-get update \
 RUN aws sts assume-role --role-arn "arn:aws:iam::596872254694:role/newrole" --role-session-name "ProdData" > sts.txt
 RUN cat sts.txt
 
-#RUN aws s3 ls --profile prod
+RUN aws s3 ls
