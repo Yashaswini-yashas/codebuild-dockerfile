@@ -12,7 +12,8 @@ RUN apt-get update \
 && touch config
 RUN echo '[profile default] \n\
 output=table \n\
-region=us-west-2' > /root/.aws/config
-#role_arn=arn:aws:iam::596872254694:role/adminrole' 
+region=us-west-2 \n\
+role_arn=arn:aws:iam::596872254694:role/newrole \n\
+source_profile=user1' > /root/.aws/config
 #credential_source=Ec2InstanceMetadata' > /root/.aws/config
 RUN aws s3 ls
