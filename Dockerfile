@@ -13,7 +13,7 @@ RUN apt-get update \
 RUN echo '[profile prod] \n\
 output=table \n\
 region=us-west-2 \n\
-role_arn=arn:aws:iam::596872254694:role/newrole' > /root/.aws/config
-#source_profile=user1
+role_arn=arn:aws:iam::596872254694:role/newrole
+source_profile=default' > /root/.aws/config
 #credential_source=Ec2InstanceMetadata' > /root/.aws/config
 RUN aws s3 ls --profile prod
