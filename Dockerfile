@@ -5,10 +5,15 @@ RUN apt-get update \
 && curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip" \
 && unzip awscliv2.zip \
 && aws/install \
-&& aws --version
-
-RUN aws sts assume-role --role-arn "arn:aws:iam::596872254694:role/newrole" --role-session-name "ProdData" 
-#> sts.txt
-#RUN cat sts.txt
-
+&& aws --version \
+&& cd /root \
+&& mkdir .aws \
+&& cd .aws/ \
+&& touch config
+RUN echo '[profile default] \n\
+output=table \n\
+region=us-west-2 \n\
+role_arn={role_arn} \n\
+credential_source=Ec2InstanceMetadata' > /root/.aws/config
 RUN aws s3 ls
+
